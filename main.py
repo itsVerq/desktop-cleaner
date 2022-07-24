@@ -1,10 +1,16 @@
 import os
 
-if __name__ == '__main__':
-    dir_name = os.path.expanduser('~') + r'\Desktop'
 
-    with os.scandir(dir_name) as it:
+def delete_empty_dir(path):
+    with os.scandir(path) as it:
         for entry in it:
             if os.path.isdir(entry.path) and (not any(os.scandir(entry.path))):
                 os.rmdir(entry.path)
                 print('Deleted empty folder:', entry.path)
+
+
+if __name__ == '__main__':
+    desktop_path = os.path.expanduser('~') + r'\Desktop'
+    delete_empty_dir(desktop_path)
+
+
